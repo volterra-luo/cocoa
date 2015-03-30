@@ -17,4 +17,9 @@ class MD5(object):
 		return m.hexdigest()
 
 	def verify(self):
-		pass
+		mysign = self.sign()
+		
+		if mysign == this.sign:
+			return True
+		
+		return False
