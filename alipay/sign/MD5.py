@@ -1,4 +1,5 @@
 #! -*- coding: utf-8 -*-
+import hashlib
 
 class MD5(object):
 
@@ -9,7 +10,11 @@ class MD5(object):
 		this.input_charset = input_charset
 
 	def  sign(self):
-		pass
+		m = hashlib.md5()
+		raw_str = this.text + this.key
+		tmp_str = unicode(raw_str, this.input_charset)
+		m.update(tmp_str)
+		return m.hexdigest()
 
 	def verify(self):
 		pass
