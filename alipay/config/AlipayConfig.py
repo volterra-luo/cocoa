@@ -3,6 +3,6 @@ import os
 
 partner = ''
 key = ''
-log_path = os.path
+log_path = ''
 input_charset = 'utf-8'
-sign_type= 'MD5'
+sign_type = 'MD5'
