@@ -55,11 +55,17 @@ def _encode_params(**kw):
 
 
 def index(request):
-	if request.method == 'POST':
+	'''
+        interact with aliyun fast login service
+    '''
+    if request.method == 'POST':
 		# 建立请求
 		http_url = '%s_input_charset=%s' % (AlipaySubmit.ALIPAY_GATEWAY_NEW, AlipayConfig.input_charset)
 		http_body = None
 		sPara = AlipaySubmit.buildRequestPara(sParaTemp)
         params = _encode_params(sPara)
 		req = urllib2.Request(http_url, data=http_body)
-	return render(request, 'alipay/index.html', {})
+
+        return HttpResponse('success')
+	
+    return render(request, 'alipay/index.html', {})
