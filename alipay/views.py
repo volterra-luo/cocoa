@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from util import AlipaySubmit
 from config import AlipayConfig
 
-import urllib2, logging, collections
+import urllib, urllib2, logging, collections
 
 # 目标服务地址
 target_service = 'user.auth.quick.login'
