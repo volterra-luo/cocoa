@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from config import AlipayConfig
+from alipay.config import AlipayConfig
 
 """
 	除去数组中的空值和签名参数
