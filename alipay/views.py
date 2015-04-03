@@ -32,7 +32,7 @@ sParaTemp['exter_invoke_ip'] = exter_invoke_ip
 
 
 def _encode_params(**kw):
-	'''
+    '''
     	do url-encode parameters
     	>>> _encode_params(a=1, b='R&D')
     	'a=1&b=R%26D'
@@ -55,7 +55,7 @@ def _encode_params(**kw):
 
 
 def index(request):
-	'''
+    '''
         interact with aliyun fast login service
     '''
     if request.method == 'POST':
@@ -63,9 +63,9 @@ def index(request):
 		http_url = '%s_input_charset=%s' % (AlipaySubmit.ALIPAY_GATEWAY_NEW, AlipayConfig.input_charset)
 		http_body = None
 		sPara = AlipaySubmit.buildRequestPara(sParaTemp)
-        params = _encode_params(sPara)
+        	params = _encode_params(**sPara)
 		req = urllib2.Request(http_url, data=http_body)
 
-        return HttpResponse('success')
+        	return HttpResponse('success')
 	
     return render(request, 'alipay/index.html', {})
