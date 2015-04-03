@@ -2,7 +2,7 @@
 import hashlib
 
 
-def sign(self, text, key, input_charset):
+def sign(text, key, input_charset):
 	m = hashlib.md5()
 	raw_str = text + key
 	tmp_str = unicode(raw_str, input_charset)
