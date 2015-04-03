@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import AlipayCore
-from config import AlipayConfig
-from sign import MD5
+from alipay.config import AlipayConfig
+from alipay.sign import MD5
 
 # 支付宝提供给商户的服务接入网关URL(新)
 ALIPAY_GATEWAY_NEW = 'https://mapi.alipay.com/gateway.do?'
