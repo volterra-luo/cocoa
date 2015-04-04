@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from util import AlipaySubmit
 from config import AlipayConfig
 
-import urllib, urllib2, logging, collections
+import time, urllib, urllib2, logging, collections, mimetypes
 
 # 目标服务地址
 target_service = 'user.auth.quick.login'
@@ -54,6 +54,36 @@ def _encode_params(**kw):
     return '&'.join(args)
 
 
+def _guess_content_type(url):
+    n = url.rfind('.')
+    if n == -1:
+        return 'application/octet-stream'
+    ext = url[n:]
+    return mimetypes.types_map.get(ext, 'application/octet-stream')
+
+
+
+def _encode_multipart(**kw):
+    ' build a multipart/form-data body with randomly generated boundary '
+    boundary = '----------%s' % hex(int(time.time() * 1000))
+    data = []
+    for k, v in kw.iteritems():
+        data.append('--%s' % boundary)
+        if hasattr(v, 'read'):
+            # file-like object:
+            filename = getattr(v, 'name', '')
+            content = v.read()
+            data.append('Content-Disposition: form-data; name="%s"; filename="hidden"' % k)
+            data.append('Content-Length: %d' % len(content))
+            data.append('Content-Type: %s\r\n' % _guess_content_type(filename))
+            data.append(content)
+        else:
+            data.append('Content-Disposition: form-data; name="%s"\r\n' % k)
+            data.append(v.encode('utf-8') if isinstance(v, unicode) else v)
+    data.append('--%s--\r\n' % boundary)
+    return '\r\n'.join(data), boundary
+
+
 def index(request):
     '''
         interact with aliyun fast login service
@@ -62,10 +92,22 @@ def index(request):
 		# 建立请求
 		http_url = '%s_input_charset=%s' % (AlipaySubmit.ALIPAY_GATEWAY_NEW, AlipayConfig.input_charset)
 		http_body = None
-		sPara = AlipaySubmit.buildRequestPara(sParaTemp)
-        	params = _encode_params(**sPara)
-		req = urllib2.Request(http_url, data=http_body)
+		
+        sPara = AlipaySubmit.buildRequestPara(sParaTemp)
+        params = _encode_params(**sPara)
+        http_body = params
+        
+        req = urllib2.Request(http_url, data=http_body)
+        req.add_header('Accept-Encoding', 'gzip')
+        try:
+            pass
+        except Exception, e:
+            raise
+        else:
+            pass
+        finally:
+            pass
 
-        	return HttpResponse('success')
-	
+        return HttpResponse('success')
+
     return render(request, 'alipay/index.html', {})
