@@ -92,22 +92,14 @@ def index(request):
 		# 建立请求
 		http_url = '%s_input_charset=%s' % (AlipaySubmit.ALIPAY_GATEWAY_NEW, AlipayConfig.input_charset)
 		http_body = None
-		
-        sPara = AlipaySubmit.buildRequestPara(sParaTemp)
-        params = _encode_params(**sPara)
-        http_body = params
-        
-        req = urllib2.Request(http_url, data=http_body)
-        req.add_header('Accept-Encoding', 'gzip')
-        try:
-            pass
-        except Exception, e:
-            raise
-        else:
-            pass
-        finally:
-            pass
 
-        return HttpResponse('success')
+		sPara = AlipaySubmit.buildRequestPara(sParaTemp)
+		params = _encode_params(**sPara)
+		http_body = params
+
+		req = urllib2.Request(http_url, data=http_body)
+		req.add_header('Accept-Encoding', 'gzip')
+
+		return HttpResponse('success')
 
     return render(request, 'alipay/index.html', {})
