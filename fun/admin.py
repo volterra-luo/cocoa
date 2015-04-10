@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Tag, Joke
+
+class JokeAdmin(admin.ModelAdmin):
+	pass
+
+admin.site.register(Joke, JokeAdmin)
