@@ -3,7 +3,7 @@ cocoa/settings.py
 lib/*
 bin/*
 include/*
-local/*
+local/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
