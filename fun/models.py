@@ -6,6 +6,9 @@ class Tag(models.Model):
 
 class Joke(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-	name = models.CharField(max_length='30')
+	name = models.CharField(max_length='30', blank=True)
 	content = models.TextField(blank=True)
-	tags = models.ManyToManyField(Tag)
+	#tags = models.ManyToManyField(Tag, null=True)
+
+	def __str__(self):
+		return self.name.encode('utf-8')
