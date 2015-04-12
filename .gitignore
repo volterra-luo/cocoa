@@ -1,9 +1,10 @@
 # 
-cocoa/settings.py
+cocoa/settings*.py
 lib/*
 bin/*
 include/*
 local/
+*.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
