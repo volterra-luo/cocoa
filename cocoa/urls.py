@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^alipay/',include('alipay.urls', namespace='alipay')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/', include(router.urls)),
+    url(r'^api-fun/', include('fun.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'cocoa.views.home', name='home'),
 )
