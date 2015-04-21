@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import patterns, url, include
 from rest_framework import routers
 from fun import views
 
@@ -12,3 +12,7 @@ router.register(r'jokes', views.JokeViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
 ]
+
+urlpatterns += patterns('',
+	url(r'^index/$', views.index),
+)
