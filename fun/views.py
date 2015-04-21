@@ -28,3 +28,7 @@ class JokeViewSet(viewsets.ModelViewSet):
     """
     queryset = Joke.objects.all()
     serializer_class = JokeSerializer
+
+def index(request):
+	args = {}
+	return render(request,'fun/index.html',args)
