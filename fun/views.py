@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from fun.serializers import UserSerializer, GroupSerializer, JokeSerializer
 from fun.models import Joke
-
+from random import randint
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -30,5 +30,7 @@ class JokeViewSet(viewsets.ModelViewSet):
     serializer_class = JokeSerializer
 
 def index(request):
-	args = {}
+	qs = Joke.objects.all()
+	joke = qs.get(randint(0, len(qs)-1))
+	args = { 'joke': joke.content }
 	return render(request,'fun/index.html',args)
