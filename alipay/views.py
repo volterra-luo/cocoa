@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from util import AlipaySubmit
 from config import AlipayConfig
@@ -84,6 +85,7 @@ def _encode_multipart(**kw):
     return '\r\n'.join(data), boundary
 
 
+@login_required(login_url='//jungle.nclab.com.cn/account/login/')
 def index(request):
     '''
         interact with aliyun fast login service
